@@ -17,7 +17,7 @@ CERTBOT_DIR="$WORK_DIR/certbot-${CERTBOT_VERSION}"
 APT_PRE_REQS="curl python python-dev libssl-dev libffi-dev build-essential"
 APT_CACHE="true"
 APT_CACHE_URL='"http://172.17.0.1:3142";'
-
+REPO_URL='git@github.com:hiniko/LEService.git'  
 
 ## USEFUL FUNCTIONS
 
@@ -29,11 +29,6 @@ check() { command -v "$1" 2>/dev/null ; }
 bail() { echo "[ERROR] $1"; exit 1; }
 
 # SCRIPT FUNCTIONS
-cleanup() {
- msg "Cleaning Up"
- rm -r "$WORK_DIR"
-}
-
 setup() {
   msg "Setup"
   mkdir "$WORK_DIR"
@@ -72,8 +67,18 @@ install_certbot(){
   python setup.py install
 } 
 
-# test certbot installation
+get_repo(){
+  msg "Getting LE Config Repo"
+}
 
+cleanup() {
+ msg "Cleaning Up"
+ rm -r "$WORK_DIR"
+ apt-get purge build-essential
+}
+
+# test certbot installation
+#TODO Sanity checks! 
 
 ## START BUIDLING!
 
