@@ -10,6 +10,7 @@
 ## VARIABLES
 CERTBOT_VERSION="0.18.2" #Leave out the v, it will be added later
 WORK_DIR="/tmp/build"
+DEBUG=true
 
 ## HELPER VARIABLES - Only touch if you know what is going on here
 CERTBOT_DIR="$WORK_DIR/certbot-${CERTBOT_VERSION}"
@@ -88,13 +89,19 @@ get_certbot
 # Installation of certbot and route53 module
 install_certbot
 
-# Testing pause in case of insepction needs
-while true; do 
-  echo -e "blocking in case you need to check things. Type 'finsihed' to continue: \n"
-  read  NOW_WHAT
-  case $NOW_WHAT in 
-    "finished" ) exit 0;;
-    * ) echo "Type 'finished' man";;
- esac
-done
+# Get configuration repo
+#TODO - Need to get git repo up
 
+# Cleanup!!
+
+# Testing pause in case of insepction needs
+if [[ $DEBUG ]]; then
+  while true; do 
+    echo -e "blocking in case you need to check things. Type 'finsihed' to continue: \n"
+    read  NOW_WHAT
+    case $NOW_WHAT in 
+      "finished" ) exit 0;;
+      * ) echo "Type 'finished' man";;
+   esac
+  done
+fi
